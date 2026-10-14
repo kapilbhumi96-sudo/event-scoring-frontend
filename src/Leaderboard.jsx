@@ -10,10 +10,8 @@ function Leaderboard({ categoryId }) {
     const stompClient = new Client({
       webSocketFactory: () => socket,
       onConnect: () => {
-        console.log('Connected, watching category:', categoryId)
         stompClient.subscribe(`/topic/leaderboard/${categoryId}`, (message) => {
           const data = JSON.parse(message.body)
-          console.log('Update received:', data)
           setEntries(data)
         })
       }

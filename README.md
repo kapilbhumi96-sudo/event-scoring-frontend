@@ -1,16 +1,72 @@
-# React + Vite
+# Event Scoring Platform — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A React application for a real-time competition scoring platform, with role-aware navigation for Organizers, Judges, and Participants, and a live-updating leaderboard powered by WebSocket.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* Separate Login and Signup pages with role selection
+* Role-aware dashboard — Organizers, Judges, and Participants each see different tools and navigation
+* Real event and category browsing (no manual IDs — everything is clickable)
+* Mandatory category selection for participant registration
+* Judge scoring screen showing real registered participants, not manually typed IDs
+* Live leaderboard (Participant view) that updates instantly via WebSocket when a judge submits a score — no refresh needed
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* React (Vite)
+* react-router-dom
+* axios
+* sockjs-client + @stomp/stompjs (WebSocket/STOMP client)
+* Plain CSS (dark theme, card-based layout)
 
-## Expanding the Oxlint configuration
+## Running Locally
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+### Prerequisites
+
+* Node.js (LTS)
+* The backend running locally at `http://localhost:8080` — see the [backend README](https://github.com/kapilbhumi96-sudo/event-scoring-backend) for setup
+
+### Setup
+
+1. Clone this repository
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Start the dev server:
+
+```bash
+npm run dev
+```
+
+The app will be available at `http://localhost:5173`.
+
+## User Roles
+
+| Role        | Can do                                                            |
+| ----------- | ----------------------------------------------------------------- |
+| Organizer   | Create events, add categories, view registered participants       |
+| Judge       | Browse categories, view real participants, submit scores          |
+| Participant | Browse events, register for categories, view the live leaderboard |
+
+## Project Structure
+
+```text
+src/
+├── pages/
+│   ├── Login
+│   ├── Signup
+│   ├── Dashboard
+│   ├── Events
+│   ├── Category
+│   ├── Score
+│   └── CreateEvent
+├── Leaderboard.jsx  - WebSocket-connected live leaderboard component
+└── index.css        - Global styling
+```
+
+## Backend
+
+The companion Spring Boot backend for this project is here: [Event Scoring Platform — Backend](https://github.com/kapilbhumi96-sudo/event-scoring-backend)
