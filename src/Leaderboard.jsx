@@ -10,8 +10,10 @@ function Leaderboard({ categoryId }) {
     const stompClient = new Client({
       webSocketFactory: () => socket,
       onConnect: () => {
+        console.log('Connected, watching category:', categoryId)
         stompClient.subscribe(`/topic/leaderboard/${categoryId}`, (message) => {
           const data = JSON.parse(message.body)
+          console.log('Update received:', data)
           setEntries(data)
         })
       }
@@ -25,13 +27,14 @@ function Leaderboard({ categoryId }) {
   }, [categoryId])
 
   return (
-    <div>
+    <div className="card">
       <h2>Live Leaderboard</h2>
-      {entries.length === 0 && <p>Waiting for scores...</p>}
-      <ol>
+      {entries.length === 0 && <p className="message">Waiting for scores...</p>}
+      <ol className="leaderboard">
         {entries.map((entry) => (
           <li key={entry.rank}>
-            {entry.participantName} — {entry.finalScore.toFixed(2)}
+            <span><span className="rank-badge">{entry.rank}</span>{entry.participantName}</span>
+            <strong>{entry.finalScore.toFixed(2)}</strong>
           </li>
         ))}
       </ol>
@@ -39,4 +42,4 @@ function Leaderboard({ categoryId }) {
   )
 }
 
-export default Leaderboard
+export default Leaderboard                                  

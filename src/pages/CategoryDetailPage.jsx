@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useParams, Link, useNavigate } from 'react-router-dom'
+import Leaderboard from '../Leaderboard'
 
 function CategoryDetailPage() {
   const { id } = useParams()
@@ -94,6 +95,11 @@ function CategoryDetailPage() {
           ))}
         </div>
       )}
+
+      {user && user.role === 'PARTICIPANT' && (
+        <Leaderboard categoryId={id} />
+      )}
+
     </div>
   )
 }
