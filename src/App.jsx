@@ -1,16 +1,17 @@
-import Login from './Login'
-import CreateEvent from './CreateEvent'
-import RegisterParticipant from './RegisterParticipant'
-import SubmitScore from './SubmitScore'
+import { Routes, Route, Navigate } from 'react-router-dom'
+import LoginPage from './pages/LoginPage'
+import SignupPage from './pages/SignupPage'
+import Dashboard from './pages/Dashboard'
 
 function App() {
   return (
-    <div>
-      <h1 className="app-title">Event Scoring Platform</h1>
-      <Login />
-      <CreateEvent />
-      <RegisterParticipant />
-      <SubmitScore />
+    <div id="app-container">
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
     </div>
   )
 }
