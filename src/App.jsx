@@ -2,6 +2,11 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
 import Dashboard from './pages/Dashboard'
+import EventsListPage from './pages/EventsListPage'
+import EventDetailPage from './pages/EventDetailPage'
+import CategoryDetailPage from './pages/CategoryDetailPage'
+import ScoreParticipantPage from './pages/ScoreParticipantPage'
+import CreateEventPage from './pages/CreateEventPage'
 
 function App() {
   return (
@@ -11,6 +16,11 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/events" element={<EventsListPage />} />
+        <Route path="/events/:id" element={<EventDetailPage />} />
+        <Route path="/categories/:id" element={<CategoryDetailPage />} />
+        <Route path="/categories/:id/score/:participantId" element={<ScoreParticipantPage />} />
+        <Route path="/create-event" element={<CreateEventPage />} />
       </Routes>
     </div>
   )
